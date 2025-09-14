@@ -97,7 +97,7 @@ func Trending(c *gin.Context, db *sql.DB, w http.ResponseWriter) {
 	for rows.Next() {
 		var article tables.Article
 
-		if err := rows.Scan(&article.Id, &article.Lang, &article.Title, &article.Body, &article.Html, &article.Author, &article.Created_at, &article.Updated_at, &article.Read_time, &article.Author_profile_url, &article.Thumbnail_url, &article.Original_url, &article.Article_tags, &article.Type, &article.Excerpt, &article.Avatar, &article.Slug); err != nil {
+		if err := rows.Scan(&article.Id, &article.Lang, &article.Title, &article.Body, &article.Html, &article.Author, &article.Created_at, &article.Updated_at, &article.Read_time, &article.Author_profile_url, &article.Thumbnail_url, &article.Original_url, &article.Article_tags, &article.Type, &article.Excerpt, &article.Avatar, &article.Slug, &article.Author_name); err != nil {
 			log.Fatal("[Trending-Article] Something went wrong when Scan row!!!", err)
 		}
 		// fmt.Println("here it is: ", article.Created_at)
@@ -130,7 +130,7 @@ func GetArticleBySlug(c *gin.Context, db *sql.DB, w http.ResponseWriter) {
 
 	for rows.Next() {
 		var article tables.Article
-		if err := rows.Scan(&article.Id, &article.Lang, &article.Title, &article.Body, &article.Html, &article.Author, &article.Created_at, &article.Updated_at, &article.Read_time, &article.Author_profile_url, &article.Thumbnail_url, &article.Original_url, &article.Article_tags, &article.Type, &article.Excerpt, &article.Avatar, &article.Slug); err != nil {
+		if err := rows.Scan(&article.Id, &article.Lang, &article.Title, &article.Body, &article.Html, &article.Author, &article.Created_at, &article.Updated_at, &article.Read_time, &article.Author_profile_url, &article.Thumbnail_url, &article.Original_url, &article.Article_tags, &article.Type, &article.Excerpt, &article.Avatar, &article.Slug, &article.Author_name); err != nil {
 			fmt.Println("[Get-Article-By-Slug] Something went wrong when extract query result. Error: ", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Something went wrong. Check log on the backend for more information."})
 		}

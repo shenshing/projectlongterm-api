@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"example.com/projectlongterm-api/endpoints/blogs"
+	"example.com/projectlongterm-api/tables"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
@@ -76,7 +77,7 @@ func main() {
 	// }
 
 	// * Insert default article.
-	// tables.Insert_articles(db)
+	tables.Insert_articles(db)
 
 	// port := os.Getenv("PORT");
 	// fmt.Println("PORT is ", port)

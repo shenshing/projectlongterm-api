@@ -14,6 +14,7 @@ type Article struct {
 	Body               string `json:"Body"`
 	Html               string `json:"Html"`
 	Author             string `json:"Author"`
+	Author_name        string `json:"Author_nam"`
 	Read_time          string `json:"Read_time"`
 	Author_profile_url string `json:"Author_profile_url"`
 	Thumbnail_url      string `json:"Thumbnail_url"`
@@ -40,6 +41,7 @@ var Default_articles = [6]Article{
 		Thumbnail_url:      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400&fit=crop",
 		Original_url:       "https://dev.to/example",
 		Article_tags:       `["HTML", "JavaScript","Performance"]`,
+		Type:               "blog",
 	},
 	{
 		Title:              "Reactive HTML Without JavaScript Frameworks",
@@ -53,6 +55,7 @@ var Default_articles = [6]Article{
 		Thumbnail_url:      "https://media2.dev.to/dynamic/image/width=800%2Cheight=400%2Cfit=crop/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fhcybj4lai4v8omukilz3.png",
 		Original_url:       "https://dev.to/anthonymax/reactive-html-without-javascript-frameworks-1anh",
 		Article_tags:       `["DevTools", "Authentication", "Release"]`,
+		Type:               "blog",
 	},
 	{
 		Title:              "Forge v0.98.0: Integrated Authentication and Developer Experience Improvements",
@@ -66,6 +69,7 @@ var Default_articles = [6]Article{
 		Thumbnail_url:      "https://media2.dev.to/dynamic/image/width=800%2Cheight=400%2Cfit=crop/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ffk69ietx9cd4821pxow3.gif",
 		Original_url:       "https://dev.to/forgecode/forge-v0980-integrated-authentication-and-developer-experience-improvements-5629",
 		Article_tags:       `["DevTools", "Authentication", "Release"]`,
+		Type:               "blog",
 	},
 	{
 		Title:              "GitHub Copilot Agent Mode: The Mistake You Never Want to Make",
@@ -79,6 +83,7 @@ var Default_articles = [6]Article{
 		Thumbnail_url:      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop",
 		Original_url:       "https://dev.to/anchildress11/github-copilot-agent-mode-the-mistake-you-never-want-to-make-1mmh",
 		Article_tags:       `["AI", "GitHub Copilot", "Development"]`,
+		Type:               "blog",
 	},
 	{
 		Title:              "Master Frontend Development by Cloning These Websites",
@@ -92,6 +97,7 @@ var Default_articles = [6]Article{
 		Thumbnail_url:      "https://media2.dev.to/dynamic/image/width=800%2Cheight=400%2Cfit=crop/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Frqg12fvhs2k9c9hbl5u8.png",
 		Original_url:       "https://dev.to/hyggedev/master-frontend-development-by-cloning-these-websites-1m08",
 		Article_tags:       `["Frontend", "Practice", "Tutorial"]`,
+		Type:               "blog",
 	},
 	{
 		Title:              "Digging Deep Into the Core of Frontend Development",
@@ -105,6 +111,7 @@ var Default_articles = [6]Article{
 		Thumbnail_url:      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=400&fit=crop",
 		Original_url:       "https://dev.to/saadahmad/digging-deep-into-the-core-of-frontend-development-oi3",
 		Article_tags:       `["Frontend", "JavaScript", "Best Practices"]`,
+		Type:               "blog",
 	},
 }
 
@@ -118,9 +125,9 @@ func Insert_articles(db *sql.DB) {
 	for index, article_element := range articles {
 		fmt.Printf("Index %d", index)
 		insert_query_as_string := `
-			INSERT INTO articles (title, lang, body, html, author, read_time, author_profile_url, thumbnail_url, article_tags, slug, author_name, excerpt, avatar)
-			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
-		result, err := db.Exec(insert_query_as_string, article_element.Title, "eng", "", article_element.Html, article_element.Author, article_element.Read_time, article_element.Author_profile_url, article_element.Thumbnail_url, article_element.Article_tags, article_element.Slug, article_element.Author, article_element.Excerpt, article_element.Avatar)
+			INSERT INTO articles (title, lang, body, html, author, read_time, author_profile_url, original_url, thumbnail_url, article_tags, slug, author_name, excerpt, avatar, type)
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
+		result, err := db.Exec(insert_query_as_string, article_element.Title, "eng", "", article_element.Html, article_element.Author, article_element.Read_time, article_element.Author_profile_url, "", article_element.Thumbnail_url, article_element.Article_tags, article_element.Slug, article_element.Author, article_element.Excerpt, article_element.Avatar, article_element.Type)
 
 		if err != nil {
 			// fmt.Println("")
