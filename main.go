@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"os"
 
-	"example.com/projectlongterm-api/endpoints/blogs"
 	"example.com/projectlongterm-api/tables"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
@@ -78,6 +77,8 @@ func main() {
 	db, err := sql.Open("mysql", mysql_username+":"+mysql_password+"@/"+mysql_database)
 	if err != nil {
 		panic(err.Error())
+	} else {
+		fmt.Println("[Connect-MySQL] Successfully connecting to MySQL.")
 	}
 	defer db.Close()
 
@@ -87,18 +88,20 @@ func main() {
 	// router.GET("albums/:id", getAlbumByID)
 	// router.POST("albums", postAlbums);
 
-	// Articles -- pagination
-	router.GET("/blogs/paginate/:limit/:offset", func(c *gin.Context) {
-		blogs.Paginate(c, db, c.Writer)
-	})
-	// Article -- trending
-	router.GET("/blogs/paginate/trending", func(c *gin.Context) {
-		blogs.Trending(c, db, c.Writer)
-	})
-	// Article -- get-article-by-slug
-	router.GET("/blogs/get-article-by-slug/:slug", func(c *gin.Context) {
-		blogs.GetArticleBySlug(c, db, c.Writer)
-	})
+	/*
+		// Articles -- pagination
+		router.GET("/blogs/paginate/:limit/:offset", func(c *gin.Context) {
+			blogs.Paginate(c, db, c.Writer)
+		})
+		// Article -- trending
+		router.GET("/blogs/paginate/trending", func(c *gin.Context) {
+			blogs.Trending(c, db, c.Writer)
+		})
+		// Article -- get-article-by-slug
+		router.GET("/blogs/get-article-by-slug/:slug", func(c *gin.Context) {
+			blogs.GetArticleBySlug(c, db, c.Writer)
+		})
+	*/
 
 	// * Create table
 	for index, create_table_query := range tables.Query_to_create_table {

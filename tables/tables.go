@@ -30,6 +30,7 @@ var Query_to_create_table = [5]string{
 			type CHAR(255),
 			excerpt VARCHAR(1000) NOT NULL,
 			avatar VARCHAR(1000) NOT NULL,
+			article_tags VARCHAR(1000) NOT NULL,
 			created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 		); 
