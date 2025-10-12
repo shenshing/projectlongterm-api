@@ -53,15 +53,15 @@ func main() {
 	// })
 
 	// * Create table
-	for index, create_table_query := range tables.Query_to_create_table {
-		fmt.Println(index, "Create table")
-		_, err := db.Exec(create_table_query)
-		if err != nil {
-			log.Printf("Error creating table at index %d: %v", index, err)
-		} else {
-			fmt.Printf("Successfully executed table creation query at index %d\n", index)
-		}
-	}
+	// for index, create_table_query := range tables.Query_to_create_table {
+	// 	fmt.Println(index, "Create table")
+	// 	_, err := db.Exec(create_table_query)
+	// 	if err != nil {
+	// 		log.Printf("Error creating table at index %d: %v", index, err)
+	// 	} else {
+	// 		fmt.Printf("Successfully executed table creation query at index %d\n", index)
+	// 	}
+	// }
 
 	// * ALter table (add, remove columns)
 	// for index, alter_table_query := range tables.Update_table_string {
@@ -75,7 +75,7 @@ func main() {
 	// }
 
 	// * Insert default article.
-	// tables.Insert_articles(db)
+	tables.Insert_articles(db)
 
 	// port := os.Getenv("PORT");
 	// fmt.Println("PORT is ", port)
