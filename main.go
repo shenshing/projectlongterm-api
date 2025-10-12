@@ -53,26 +53,26 @@ func main() {
 	// })
 
 	// * Create table
-	// for index, create_table_query := range tables.Query_to_create_table {
-	// 	fmt.Println(index, "Create table")
-	// 	_, err := db.Exec(create_table_query)
-	// 	if err != nil {
-	// 		log.Printf("Error creating table at index %d: %v", index, err)
-	// 	} else {
-	// 		fmt.Printf("Successfully executed table creation query at index %d\n", index)
-	// 	}
-	// }
-
-	// * ALter table (add, remove columns)
-	for index, alter_table_query := range tables.Update_table_string {
-		fmt.Println(index, " Alter table ")
-		_, err := db.Exec(alter_table_query)
+	for index, create_table_query := range tables.Query_to_create_table {
+		fmt.Println(index, "Create table")
+		_, err := db.Exec(create_table_query)
 		if err != nil {
-			log.Printf("Error altering table at index %d, %v", index, err)
+			log.Printf("Error creating table at index %d: %v", index, err)
 		} else {
-			fmt.Printf("Successfully altering table query at index %d\n", index)
+			fmt.Printf("Successfully executed table creation query at index %d\n", index)
 		}
 	}
+
+	// * ALter table (add, remove columns)
+	// for index, alter_table_query := range tables.Update_table_string {
+	// 	fmt.Println(index, " Alter table ")
+	// 	_, err := db.Exec(alter_table_query)
+	// 	if err != nil {
+	// 		log.Printf("Error altering table at index %d, %v", index, err)
+	// 	} else {
+	// 		fmt.Printf("Successfully altering table query at index %d\n", index)
+	// 	}
+	// }
 
 	// * Insert default article.
 	// tables.Insert_articles(db)
