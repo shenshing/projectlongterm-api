@@ -6,9 +6,7 @@ import (
 	"log"
 	"os"
 
-	"example.com/projectlongterm-api/endpoints/blogs"
 	"example.com/projectlongterm-api/tables"
-	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 )
@@ -36,23 +34,23 @@ func main() {
 	defer db.Close()
 
 	// * List all routes.
-	router := gin.Default()
+	// router := gin.Default()
 	// router.GET("/albums", getAlbums)
 	// router.GET("albums/:id", getAlbumByID)
 	// router.POST("albums", postAlbums);
 
 	// Articles -- pagination
-	router.GET("/blogs/paginate/:limit/:offset", func(c *gin.Context) {
-		blogs.Paginate(c, db, c.Writer)
-	})
-	// Article -- trending
-	router.GET("/blogs/paginate/trending", func(c *gin.Context) {
-		blogs.Trending(c, db, c.Writer)
-	})
-	// Article -- get-article-by-slug
-	router.GET("/blogs/get-article-by-slug/:slug", func(c *gin.Context) {
-		blogs.GetArticleBySlug(c, db, c.Writer)
-	})
+	// router.GET("/blogs/paginate/:limit/:offset", func(c *gin.Context) {
+	// 	blogs.Paginate(c, db, c.Writer)
+	// })
+	// // Article -- trending
+	// router.GET("/blogs/paginate/trending", func(c *gin.Context) {
+	// 	blogs.Trending(c, db, c.Writer)
+	// })
+	// // Article -- get-article-by-slug
+	// router.GET("/blogs/get-article-by-slug/:slug", func(c *gin.Context) {
+	// 	blogs.GetArticleBySlug(c, db, c.Writer)
+	// })
 
 	// * Create table
 	// for index, create_table_query := range tables.Query_to_create_table {
@@ -66,18 +64,18 @@ func main() {
 	// }
 
 	// * ALter table (add, remove columns)
-	// for index, alter_table_query := range tables.Update_table_string {
-	// 	fmt.Println(index, " Alter table ")
-	// 	_, err := db.Exec(alter_table_query)
-	// 	if err != nil {
-	// 		log.Printf("Error altering table at index %d, %v", index, err)
-	// 	} else {
-	// 		fmt.Printf("Successfully altering table query at index %d\n", index)
-	// 	}
-	// }
+	for index, alter_table_query := range tables.Update_table_string {
+		fmt.Println(index, " Alter table ")
+		_, err := db.Exec(alter_table_query)
+		if err != nil {
+			log.Printf("Error altering table at index %d, %v", index, err)
+		} else {
+			fmt.Printf("Successfully altering table query at index %d\n", index)
+		}
+	}
 
 	// * Insert default article.
-	tables.Insert_articles(db)
+	// tables.Insert_articles(db)
 
 	// port := os.Getenv("PORT");
 	// fmt.Println("PORT is ", port)
@@ -86,6 +84,6 @@ func main() {
 	// utils.HelperFunction()
 
 	// * Run web server.
-	router.Run("localhost:9090")
+	// router.Run("localhost:9090")
 
 }
